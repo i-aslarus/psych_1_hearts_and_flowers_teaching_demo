@@ -670,9 +670,21 @@ function showBlockResultsScreen(blockIdx, results) {
   }
 
   el('results-stats').innerHTML = statsHTML;
-  el('results-explanation').style.display = 'none';
+  el('results-deep-explanation').innerHTML = `<p>${b.statsExplanation}</p>`;
 
-  buildQuiz(blockIdx, b);
+  const nextIdx = blockIdx + 1;
+  const nextBtn = el('btn-next-block');
+  let advanceFn;
+  if (nextIdx < BLOCKS.length) {
+    nextBtn.innerHTML = TOUCH ? 'Tap to continue' : 'Press <kbd>SPACE</kbd> to continue';
+    advanceFn = () => showBlockIntro(nextIdx);
+  } else {
+    nextBtn.innerHTML = TOUCH ? 'Tap for final results' : 'Press <kbd>SPACE</kbd> for final results';
+    advanceFn = () => showFinalSummary();
+  }
+  nextBtn.onclick = advanceFn;
+  onSpace(advanceFn);
+
   showScreen('screen-block-results');
   // Scroll to top on this screen
   el('screen-block-results').scrollTop = 0;
