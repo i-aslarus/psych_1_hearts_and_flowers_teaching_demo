@@ -19,7 +19,7 @@ const BLOCKS = [
     name: 'Hearts',
     color: '#e74c3c',
     stimType: 'heart',
-    testCount: 16,
+    testCount: 24,
     practiceCount: 2,
     label: 'Block 1 of 3',
     ruleHTML: `
@@ -55,7 +55,7 @@ const BLOCKS = [
     name: 'Flowers',
     color: '#9b59b6',
     stimType: 'flower',
-    testCount: 16,
+    testCount: 24,
     practiceCount: 2,
     label: 'Block 2 of 3',
     ruleHTML: `
@@ -93,7 +93,7 @@ const BLOCKS = [
     name: 'Mixed',
     color: '#2980b9',
     stimType: 'both',
-    testCount: 16,
+    testCount: 24,
     practiceCount: 2,
     label: 'Block 3 of 3',
     ruleHTML: `
@@ -285,18 +285,18 @@ function makeTestTrials(blockIdx) {
   let trials = [];
 
   if (b.stimType === 'heart') {
-    for (let i = 0; i < 8; i++) trials.push({ stimType: 'heart', stimSide: 'left' });
-    for (let i = 0; i < 8; i++) trials.push({ stimType: 'heart', stimSide: 'right' });
+    for (let i = 0; i < 12; i++) trials.push({ stimType: 'heart', stimSide: 'left' });
+    for (let i = 0; i < 12; i++) trials.push({ stimType: 'heart', stimSide: 'right' });
     trials = enforceMaxRun(shuffle(trials), t => t.stimSide, 3);
   } else if (b.stimType === 'flower') {
-    for (let i = 0; i < 8; i++) trials.push({ stimType: 'flower', stimSide: 'left' });
-    for (let i = 0; i < 8; i++) trials.push({ stimType: 'flower', stimSide: 'right' });
+    for (let i = 0; i < 12; i++) trials.push({ stimType: 'flower', stimSide: 'left' });
+    for (let i = 0; i < 12; i++) trials.push({ stimType: 'flower', stimSide: 'right' });
     trials = enforceMaxRun(shuffle(trials), t => t.stimSide, 3);
   } else {
-    for (let i = 0; i < 4; i++) trials.push({ stimType: 'heart',  stimSide: 'left'  });
-    for (let i = 0; i < 4; i++) trials.push({ stimType: 'heart',  stimSide: 'right' });
-    for (let i = 0; i < 4; i++) trials.push({ stimType: 'flower', stimSide: 'left'  });
-    for (let i = 0; i < 4; i++) trials.push({ stimType: 'flower', stimSide: 'right' });
+    for (let i = 0; i < 6; i++) trials.push({ stimType: 'heart',  stimSide: 'left'  });
+    for (let i = 0; i < 6; i++) trials.push({ stimType: 'heart',  stimSide: 'right' });
+    for (let i = 0; i < 6; i++) trials.push({ stimType: 'flower', stimSide: 'left'  });
+    for (let i = 0; i < 6; i++) trials.push({ stimType: 'flower', stimSide: 'right' });
     trials = enforceMaxRun(shuffle(trials), t => t.stimType, 3);
     for (let i = 0; i < trials.length; i++) {
       trials[i].isSwitch = i > 0 && trials[i].stimType !== trials[i - 1].stimType;
