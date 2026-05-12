@@ -554,7 +554,13 @@ function finishTest() {
   clearTrialTimers();
   const results = computeResults(S.blockIndex, S.testResults);
   S.allResults.push(results);
-  showBlockResultsScreen(S.blockIndex, results);
+  showWaitScreen(results);
+}
+
+function showWaitScreen(results) {
+  showScreen('screen-wait');
+  const btn = el('btn-wait-continue');
+  btn.onclick = () => showBlockResultsScreen(S.blockIndex, results);
 }
 
 // ============================================================
